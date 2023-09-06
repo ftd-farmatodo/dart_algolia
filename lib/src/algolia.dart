@@ -19,7 +19,9 @@ class Algolia {
     required String apiKey,
     this.extraHeaders = const {},
     this.extraUserAgents = const [],
-  }) : _apiKey = apiKey;
+    String? customHost,
+  })  : _apiKey = apiKey,
+        _customHost = customHost;
 
   /// A internal constructor.
   const Algolia._({
@@ -27,7 +29,9 @@ class Algolia {
     required String apiKey,
     this.extraHeaders = const {},
     this.extraUserAgents = const [],
-  }) : _apiKey = apiKey;
+    String? customHost,
+  })  : _apiKey = apiKey,
+        _customHost = customHost;
 
   /// A variable that is used to store the application id.
   final String applicationId;
@@ -41,15 +45,19 @@ class Algolia {
   /// Used to add extra user agents to the request.
   final List<String> extraUserAgents;
 
+  final String? _customHost;
+
   /// A getter that returns a new instance of Algolia.
   Algolia get instance => Algolia._(
         applicationId: applicationId,
         apiKey: _apiKey,
         extraHeaders: _headers,
         extraUserAgents: _userAgents,
+        customHost: _customHost,
       );
 
-  String get _host => 'https://$applicationId-dsn.algolia.net/1/';
+  String get _host =>
+      _customHost ?? 'https://$applicationId-dsn.algolia.net/1/';
   String get _hostWrite => 'https://$applicationId.algolia.net/1/';
   String get _hostFallback1 => 'https://$applicationId-1.algolianet.com/1/';
   String get _hostFallback2 => 'https://$applicationId-2.algolianet.com/1/';
