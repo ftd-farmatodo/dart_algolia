@@ -58,7 +58,8 @@ class Algolia {
 
   String get _host =>
       _customHost ?? 'https://$applicationId-dsn.algolia.net/1/';
-  String get _hostWrite => 'https://$applicationId.algolia.net/1/';
+  String get _hostWrite =>
+      _customHost ?? 'https://$applicationId.algolia.net/1/';
   String get _hostFallback1 => 'https://$applicationId-1.algolianet.com/1/';
   String get _hostFallback2 => 'https://$applicationId-2.algolianet.com/1/';
   String get _hostFallback3 => 'https://$applicationId-3.algolianet.com/1/';
